@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise Gift 🎁</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f3f4f6;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            padding: 30px;
+            border-radius: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #343a40;
+            margin-bottom: 20px;
+        }
+
+        .gift-box-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .gift-box {
+            width: 200px;
+            height: 200px;
+            background-color: #ff6f61;
+            border-radius: 15px;
+            position: relative;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            transition: transform 1s ease-in-out;
+        }
+
+        .gift-box:hover {
+            transform: scale(1.05);
+        }
+
+        .gift-box:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            width: 100%;
+            height: 10px;
+            background-color: white;
+            z-index: 1;
+        }
+
+        .gift-box .ribbon {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background-color: #fff;
+            z-index: 0;
+        }
+
+        .ribbon:before, .ribbon:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 20px;
+            height: 100%;
+            background-color: #fff;
+        }
+
+        .ribbon:before {
+            left: 0;
+        }
+
+        .ribbon:after {
+            right: 0;
+        }
+
+        .gift-content {
+            display: none;
+            padding: 20px;
+            background-color: #ffeb3b;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+            transition: opacity 1s ease;
+        }
+
+        .gift-content.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ffeb3b;
+            animation: confettiFall 2s infinite forwards;
+            opacity: 0;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                opacity: 1;
+                transform: translateY(-100px) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(720deg);
+            }
+        }
+
+        .click-button {
+            font-size: 1.4rem;
+            color: #343a40;
+            margin-top: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            background-color: #ff5722;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        .click-button:hover {
+            background-color: #e64a19;
+        }
+
+        audio {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎁 Unwrap Your Surprise!</h1>
+
+        <!-- Gift Box Section -->
+        <div class="gift-box-wrapper" onclick="revealGift()">
+            <div class="gift-box">
+                <div class="ribbon"></div>
+            </div>
+        </div>
+
+        <!-- Button to Click -->
+        <div class="click-button" id="clickButton">Click to Open</div>
+
+        <!-- Gift Content Section -->
+        <div class="gift-content" id="giftContent">
+            <p>🎉 Surprise! Here’s your Gift!</p>
+            <img src="https://via.placeholder.com/200" alt="Gift Card" style="width: 150px; border-radius: 15px;">
+            <div>Enjoy your surprise gift 🎁</div>
+            <a href="https://www.amazon.com/gift-card" target="_blank">Claim Your Gift</a>
+        </div>
+
+        <!-- Audio for Birthday Song -->
+        <audio id="birthdaySong" src="C:\Users\Akhil\OneDrive\Desktop\New folder\song and images\myinstants.mp3" preload="auto"></audio>
+    </div>
+
+    <script>
+        function revealGift() {
+            // Show the gift content and trigger animation
+            const giftContent = document.getElementById('giftContent');
+            giftContent.classList.add('show');
+            const clickButton = document.getElementById('clickButton');
+            clickButton.style.display = 'none';
+
+            // Confetti animation
+            createConfetti();
+
+            // Play birthday song
+            playBirthdaySong();
+        }
+
+        function createConfetti() {
+            const container = document.querySelector('.container');
+            for (let i = 0; i < 50; i++) {
+                let confettiPiece = document.createElement('div');
+                confettiPiece.classList.add('confetti');
+                confettiPiece.style.left = `${Math.random() * 100}%`;
+                confettiPiece.style.animationDelay = `${Math.random() * 2}s`;
+                container.appendChild(confettiPiece);
+            }
+        }
+
+        function playBirthdaySong() {
+            const song = document.getElementById('birthdaySong');
+            song.play();
+        }
+    </script>
+</body>
+</html>
